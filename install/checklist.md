@@ -10,10 +10,17 @@ xserver-xorg-input-evdev xserver-xorg-video-dummy x11-xserver-utils fglrx xdm`
 - wget the appropriate driver from nvidia's download site
 e.g `wget http://us.download.nvidia.com/XFree86/Linux-x86_64/460.67/NVIDIA-Linux-x86_64-460.67.run`
 - install dependencies `sudo apt-get install build-essential gcc-multilib dkms`
+- [Disable Nouveau (the drivers ubuntu ships with)](https://linuxconfig.org/how-to-disable-blacklist-nouveau-nvidia-driver-on-ubuntu-20-04-focal-fossa-linux):
+- `sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf"`
+`sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"`
+- `sudo update-initramfs -u`
 - run the install script `sudo chmod +x NVIDIA-Linux-x86_64-460.67.run`
 `sudo ./NVIDIA-Linux-x86_64-460.67.run`
+- say yes to whatever, EXCEPT say not to DKMS 
 - test install with `nvidia-smi`
 
+
+[Driver install guide that actually worked](https://phoenixnap.com/kb/install-nvidia-drivers-ubuntu#ftoc-heading-6)
 
 [Hashcat guide on installing on Linux](https://hashcat.net/wiki/doku.php?id=frequently_asked_questions#how_does_one_install_the_correct_driver_for_the_gpu_s)
 - drivers (see above driver install guide)
